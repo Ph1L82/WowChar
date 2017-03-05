@@ -37,6 +37,8 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         int textColor = Color.parseColor(String.valueOf(R.color.textColorPrimary));
         Character character = characters.get(position);
+
+        // TODO: 05-03-2017 modificar modelos forzar id en la data preguardada. Evaluar facciones, razas y clases en base a ID especifico.
         if (character.getCharacterFaction().getName() == "Horda") {
             holder.factionBadge.setImageResource(R.mipmap.ic_wow_flag_horde_24dp);
 
