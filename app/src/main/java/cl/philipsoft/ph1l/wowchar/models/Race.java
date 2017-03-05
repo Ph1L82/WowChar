@@ -2,13 +2,15 @@ package cl.philipsoft.ph1l.wowchar.models;
 
 import com.orm.SugarRecord;
 
+import java.io.Serializable;
+
 /**
  * Created by phil_ on 11-02-2017.
  * Race: Raza especifica del personaje, integra estadisticas basicas.
  * Pertenecen a una faccion (Faction) específica.
  */
 
-public class Race extends SugarRecord {
+public class Race extends SugarRecord implements Serializable{
 
     private int baseStrength, baseAgility, baseStamina, baseIntellect, baseSpirit;
     private String raceName;

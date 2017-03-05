@@ -14,8 +14,8 @@ import cl.philipsoft.ph1l.wowchar.models.Race;
 public class DataSeeder {
     public List<Faction> createFactions() {
         List<Faction> factions = new ArrayList<>();
-        Faction alliance = new Faction("Alianza");
-        Faction horde = new Faction("Horda");
+        Faction alliance = new Faction("Alliance");
+        Faction horde = new Faction("Horde");
 
         factions.add(alliance);
         factions.add(horde);
@@ -27,17 +27,17 @@ public class DataSeeder {
 
     public List<Race> createRaces() {
         List<Race> races = new ArrayList<>();
-        Race human = new Race(20, 20, 20, 20, 20, "Humano");
-        Race dwarf = new Race(25, 16, 21, 19, 19, "Enano");
-        Race nightElf = new Race(16, 24, 20, 20, 20, "Elfo Nocturno");
-        Race gnome = new Race(15, 22, 20, 20, 22, "Gnomo");
+        Race human = new Race(20, 20, 20, 20, 20, "Human");
+        Race dwarf = new Race(25, 16, 21, 19, 19, "Dwarf");
+        Race nightElf = new Race(16, 24, 20, 20, 20, "Night Elf");
+        Race gnome = new Race(15, 22, 20, 20, 22, "Gnome");
         Race draenei = new Race(21, 17, 20, 20, 22, "Draenei");
-        Race worgen = new Race(23, 22, 20, 16, 19, "Huargo");
-        Race orc = new Race(23, 17, 21, 17, 22, "Orco");
-        Race undead = new Race(19, 18, 20, 18, 25, "No-Muerto");
+        Race worgen = new Race(23, 22, 20, 16, 19, "Worgen");
+        Race orc = new Race(23, 17, 21, 17, 22, "Orc");
+        Race undead = new Race(19, 18, 20, 18, 25, "Undead");
         Race tauren = new Race(25, 16, 21, 16, 22, "Tauren");
         Race troll = new Race(21, 22, 20, 16, 21, "Troll");
-        Race bloodElf = new Race(17, 22, 20, 23, 18, "Elfo Nocturno");
+        Race bloodElf = new Race(17, 22, 20, 23, 18, "Blood Elf");
         Race goblin = new Race(17, 22, 20, 23, 18, "Goblin");
 
         races.add(human);
@@ -60,15 +60,15 @@ public class DataSeeder {
 
     public List<Class> createClasses() {
         List<Class> classes = new ArrayList<>();
-        Class priest = new Class(0, 0, 0, 2, 3, "Sacerdote");
-        Class rogue = new Class(1, 3, 1, 0, 0, "Pícaro");
-        Class warrior = new Class(3, 0, 2, 0, 0, "Guerrero");
-        Class mage = new Class(0, 0, 0, 3, 2, "Mago");
-        Class druid = new Class(1, 0, 0, 2, 2, "Druida");
-        Class hunter = new Class(0, 3, 1, 0, 1, "Cazador");
-        Class warlock = new Class(0, 0, 1, 2, 2, "Brujo");
-        Class shaman = new Class(1, 0, 1, 1, 2, "Chamán");
-        Class paladin = new Class(2, 0, 2, 0, 1, "Paladín");
+        Class priest = new Class(0, 0, 0, 2, 3, "Priest");
+        Class rogue = new Class(1, 3, 1, 0, 0, "Rogue");
+        Class warrior = new Class(3, 0, 2, 0, 0, "Warrior");
+        Class mage = new Class(0, 0, 0, 3, 2, "Mage");
+        Class druid = new Class(1, 0, 0, 2, 2, "Druid");
+        Class hunter = new Class(0, 3, 1, 0, 1, "Hunter");
+        Class warlock = new Class(0, 0, 1, 2, 2, "Warlock");
+        Class shaman = new Class(1, 0, 1, 1, 2, "Shaman");
+        Class paladin = new Class(2, 0, 2, 0, 1, "Paladin");
 
         classes.add(priest);
         classes.add(rogue);

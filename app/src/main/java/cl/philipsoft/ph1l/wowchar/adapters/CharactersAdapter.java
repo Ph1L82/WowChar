@@ -16,6 +16,7 @@ import cl.philipsoft.ph1l.wowchar.R;
 import cl.philipsoft.ph1l.wowchar.data.Queries;
 import cl.philipsoft.ph1l.wowchar.models.Character;
 
+import static cl.philipsoft.ph1l.wowchar.R.drawable.bg_alliance;
 import static cl.philipsoft.ph1l.wowchar.R.drawable.bg_horde;
 
 /**
@@ -37,25 +38,26 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         int textColor = Color.parseColor(String.valueOf(R.color.textColorPrimary));
         Character character = characters.get(position);
+
+        // TODO: 05-03-2017 modificar modelos forzar id en la data preguardada. Evaluar facciones, razas y clases en base a ID especifico.
         if (character.getCharacterFaction().getName() == "Horda") {
             holder.factionBadge.setImageResource(R.mipmap.ic_wow_flag_horde_24dp);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 holder.itemView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), bg_horde));
                 textColor = Color.parseColor(String.valueOf(R.color.hordeBackground));
+            } else {
+                holder.itemView.setBackgroundResource(bg_alliance);
             }
-
-
         } else if (character.getCharacterFaction().getName() == "Alianza") {
             holder.factionBadge.setImageResource(R.mipmap.ic_wow_flag_alliance_24dp);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                holder.itemView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), bg_horde));
+                holder.itemView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), bg_alliance));
                 textColor = Color.parseColor(String.valueOf(R.color.allianceBackground));
+            } else {
+                holder.itemView.setBackgroundResource(bg_alliance);
             }
-
-        } else {
-            holder.factionBadge.setImageToDefault();
         }
         holder.charRace.setTextColor(textColor);
         holder.charClass.setTextColor(textColor);
@@ -63,8 +65,6 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Vi
         holder.charRace.setText(character.getCharacterRace().getRaceName());
         holder.charClass.setText(character.getCharacterClass().getClassName());
         holder.charName.setText(character.getCharacterName());
-
-
     }
 
     @Override

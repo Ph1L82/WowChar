@@ -1,16 +1,19 @@
 package cl.philipsoft.ph1l.wowchar.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import cl.philipsoft.ph1l.wowchar.R;
+import cl.philipsoft.ph1l.wowchar.data.DataSeeder;
+import cl.philipsoft.ph1l.wowchar.data.Queries;
 import cl.philipsoft.ph1l.wowchar.models.Character;
 
 public class MainActivity extends AppCompatActivity implements CharacterCallback {
@@ -22,12 +25,14 @@ public class MainActivity extends AppCompatActivity implements CharacterCallback
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        dataLoader();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, ChooseFactionRaceActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -61,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements CharacterCallback
 
     @Override
     public void noName() {
-        Toast.makeText(this, "El personáje no tiene nombre.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "El personaje no tiene nombre.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -72,5 +77,26 @@ public class MainActivity extends AppCompatActivity implements CharacterCallback
     @Override
     public void noClass() {
         Toast.makeText(this, "No tiene clase...que picante", Toast.LENGTH_SHORT).show();
+    }
+
+    private void dataLoader() {
+        Queries queries = new Queries();
+        DataSeeder dataSeeder = new DataSeeder();
+        if (queries.factions().size() < 1) {
+            Log.d("WOWCDATA", "Queries().factions().size() : " + queries.factions().size());
+            dataSeeder.createFactions();
+            Log.d("WOWCDATA", "dataLoader: Facciones creadas");
+        }
+        if (queries.races().size() < 11) {
+            Log.d("WOWCDATA", "Queries().races().size() : " + queries.races().size());
+            dataSeeder.createRaces();
+            Log.d("WOWCDATA", "dataLoader: Razas creadas");
+        }
+        if (queries.classes().size() < 8) {
+            Log.d("WOWCDATA", "Queries().classes().size() : " + queries.classes().size());
+            dataSeeder.createClasses();
+            Log.d("WOWCDATA", "dataLoader: Clases creadas");
+        }
+
     }
 }

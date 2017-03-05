@@ -2,11 +2,13 @@ package cl.philipsoft.ph1l.wowchar.models;
 
 import com.orm.SugarRecord;
 
+import java.io.Serializable;
+
 /**
  * Created by phil_ on 11-02-2017.
  */
 
-public class Character extends SugarRecord {
+public class Character extends SugarRecord implements Serializable{
     private Faction characterFaction;
     private Race characterRace;
     private Class characterClass;

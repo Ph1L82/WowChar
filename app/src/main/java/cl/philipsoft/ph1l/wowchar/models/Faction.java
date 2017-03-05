@@ -2,12 +2,14 @@ package cl.philipsoft.ph1l.wowchar.models;
 
 import com.orm.SugarRecord;
 
+import java.io.Serializable;
+
 /**
  * Created by phil_ on 11-02-2017.
  * Faction : Agrupacion de razas
  */
 
-public class Faction extends SugarRecord {
+public class Faction extends SugarRecord implements Serializable{
     private String name;
 
     public Faction() {

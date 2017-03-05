@@ -2,13 +2,15 @@ package cl.philipsoft.ph1l.wowchar.models;
 
 import com.orm.SugarRecord;
 
+import java.io.Serializable;
+
 /**
  * Created by phil_ on 11-02-2017.
  * Class: clase o tipo de jugador pertenece a una raza
  * no todas las clases pueden ser utilizadas por todas las razas
  */
 
-public class Class extends SugarRecord {
+public class Class extends SugarRecord implements Serializable{
     private int bonusStrength, bonusAgility, bonusStamina, bonusIntellect, bonusSpirit;
     private String className;
 
