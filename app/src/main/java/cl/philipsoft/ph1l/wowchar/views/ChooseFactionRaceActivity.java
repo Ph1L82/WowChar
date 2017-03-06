@@ -19,6 +19,7 @@ import cl.philipsoft.ph1l.wowchar.models.Race;
 public class ChooseFactionRaceActivity extends AppCompatActivity {
     private Faction faction;
     private Race race;
+    private String raceName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,36 +66,30 @@ public class ChooseFactionRaceActivity extends AppCompatActivity {
         allianceRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                String raceName = getResources().getResourceEntryName(checkedId).replace("race", "");
+                raceName = getResources().getResourceEntryName(checkedId).replace("race", "");
                 raceName = raceName.replace("Rb", "");
-                Log.d("WOWC", "onCheckedChanged: Raza seleccionada : [" + raceName + "]");
+                Log.d("WOWC", "onCheckedChanged: raceName: " + raceName);
                 List<Race> raceList = Race.find(Race.class, "race_name = ?", raceName);
-                Log.d("WOWC", "onCheckedChanged: 1 raceList.size" + raceList.size());
-                if (raceList != null && raceList.size() > 0) {
-                    Log.d("WOWC", "onCheckedChanged: 2 raceList.size : " + raceList.size());
+                if (!raceList.isEmpty()) {
                     race = raceList.get(0);
-                } else {
-                    Log.d("WOWC", "onCheckedChanged: 3 raceList.size : " + raceList.size());
+                    Log.d("WOWC", "onCheckedChanged: RACE: " + race.getRaceName());
+                    sendBtn.setEnabled(true);
                 }
-
             }
         });
 
         hordeRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                String raceName = getResources().getResourceEntryName(checkedId).replace("race", "");
+                raceName = getResources().getResourceEntryName(checkedId).replace("race", "");
                 raceName = raceName.replace("Rb", "");
-                Log.d("WOWC", "onCheckedChanged: Raza seleccionada : [" + raceName + "]");
+                Log.d("WOWC", "onCheckedChanged: raceName: " + raceName);
                 List<Race> raceList = Race.find(Race.class, "race_name = ?", raceName);
-                Log.d("WOWC", "onCheckedChanged: 1 raceList.size" + raceList.size());
-                if (raceList != null && raceList.size() > 0) {
-                    Log.d("WOWC", "onCheckedChanged: 2 raceList.size : " + raceList.size());
+                if (!raceList.isEmpty()) {
                     race = raceList.get(0);
-                } else {
-                    Log.d("WOWC", "onCheckedChanged: 3 raceList.size : " + raceList.size());
+                    Log.d("WOWC", "onCheckedChanged: RACE: " + race.getRaceName());
+                    sendBtn.setEnabled(true);
                 }
-
             }
         });
 

@@ -1,5 +1,6 @@
 package cl.philipsoft.ph1l.wowchar.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import cl.philipsoft.ph1l.wowchar.R;
+import cl.philipsoft.ph1l.wowchar.adapters.CharacterClickListener;
 import cl.philipsoft.ph1l.wowchar.adapters.CharactersAdapter;
+import cl.philipsoft.ph1l.wowchar.models.Character;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment implements CharacterClickListener {
 
     public MainActivityFragment() {
     }
@@ -37,7 +40,21 @@ public class MainActivityFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        CharactersAdapter charactersAdapter = new CharactersAdapter();
+        CharactersAdapter charactersAdapter = new CharactersAdapter(this);
         recyclerView.setAdapter(charactersAdapter);
+    }
+
+    @Override
+    public void clickedId(Long id) {
+        Intent intent = new Intent(getActivity(), CharacterDetailsActivity.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
+    }
+
+    @Override
+    public void clickedCharacter(Character character) {
+        Intent intent = new Intent(getActivity(), CharacterDetailsActivity.class);
+        intent.putExtra("Character", character);
+        startActivity(intent);
     }
 }

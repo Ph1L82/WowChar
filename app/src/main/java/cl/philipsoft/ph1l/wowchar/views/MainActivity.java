@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements CharacterCallback
 
     @Override
     public void created(Character character) {
-
+        Log.d("WOWC", "created: Personaje creado: "+character.getCharacterName());
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Pertenecen a una faccion (Faction) específica.
  */
 
-public class Race extends SugarRecord implements Serializable{
+public class Race extends SugarRecord implements Serializable {
 
     private int baseStrength, baseAgility, baseStamina, baseIntellect, baseSpirit;
     private String raceName;
@@ -24,6 +24,8 @@ public class Race extends SugarRecord implements Serializable{
         this.raceName = raceName;
     }
 
+    public Race() {
+    }
 
     public int getBaseStrength() {
         return baseStrength;

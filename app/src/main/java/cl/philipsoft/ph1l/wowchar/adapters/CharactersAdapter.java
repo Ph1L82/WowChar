@@ -1,6 +1,5 @@
 package cl.philipsoft.ph1l.wowchar.adapters;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +25,11 @@ import static cl.philipsoft.ph1l.wowchar.R.drawable.bg_horde;
 public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.ViewHolder> {
 
     private List<Character> characters = new Queries().characters();
+    private CharacterClickListener listener;
+
+    public CharactersAdapter(CharacterClickListener listener) {
+        this.listener = listener;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,41 +39,56 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        int textColor = Color.parseColor(String.valueOf(R.color.textColorPrimary));
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        int textColor = R.color.textColorPrimary;
         Character character = characters.get(position);
 
         // TODO: 05-03-2017 modificar modelos forzar id en la data preguardada. Evaluar facciones, razas y clases en base a ID especifico.
-        if (character.getCharacterFaction().getName() == "Horda") {
+        if (character.getCharacterFaction().getName() == "Horde") {
             holder.factionBadge.setImageResource(R.mipmap.ic_wow_flag_horde_24dp);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 holder.itemView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), bg_horde));
-                textColor = Color.parseColor(String.valueOf(R.color.hordeBackground));
+                holder.charRace.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.hordeFront));
+                holder.charClass.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.hordeFront));
+                holder.charName.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.hordeFront));
             } else {
                 holder.itemView.setBackgroundResource(bg_alliance);
             }
-        } else if (character.getCharacterFaction().getName() == "Alianza") {
+        } else if (character.getCharacterFaction().getName() == "Alliance") {
             holder.factionBadge.setImageResource(R.mipmap.ic_wow_flag_alliance_24dp);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 holder.itemView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), bg_alliance));
-                textColor = Color.parseColor(String.valueOf(R.color.allianceBackground));
+                holder.charRace.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.allianceFront));
+                holder.charClass.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.allianceFront));
+                holder.charName.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.allianceFront));
             } else {
                 holder.itemView.setBackgroundResource(bg_alliance);
             }
         }
-        holder.charRace.setTextColor(textColor);
-        holder.charClass.setTextColor(textColor);
-        holder.charName.setTextColor(textColor);
+
         holder.charRace.setText(character.getCharacterRace().getRaceName());
         holder.charClass.setText(character.getCharacterClass().getClassName());
         holder.charName.setText(character.getCharacterName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Character aux = characters.get(holder.getAdapterPosition());
+                listener.clickedCharacter(aux);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return characters.size();
+    }
+
+    public void addCharacter(Character character) {
+        characters.add(character);
+        notifyDataSetChanged();
     }
 
 // ====>>>>   Clase interna ViewHolder

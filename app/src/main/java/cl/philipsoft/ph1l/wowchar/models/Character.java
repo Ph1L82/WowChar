@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by phil_ on 11-02-2017.
  */
 
-public class Character extends SugarRecord implements Serializable{
+public class Character extends SugarRecord implements Serializable {
     private Faction characterFaction;
     private Race characterRace;
     private Class characterClass;
@@ -63,6 +63,8 @@ public class Character extends SugarRecord implements Serializable{
         this.characterLevel = characterLevel;
     }
 
+    public Character() {
+    }
 
     public Character(String characterName) {
         this.characterName = characterName;

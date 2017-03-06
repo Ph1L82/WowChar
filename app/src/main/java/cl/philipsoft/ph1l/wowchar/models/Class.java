@@ -10,9 +10,12 @@ import java.io.Serializable;
  * no todas las clases pueden ser utilizadas por todas las razas
  */
 
-public class Class extends SugarRecord implements Serializable{
+public class Class extends SugarRecord implements Serializable {
     private int bonusStrength, bonusAgility, bonusStamina, bonusIntellect, bonusSpirit;
     private String className;
+
+    public Class() {
+    }
 
     public Class(int bonusStrength, int bonusAgility, int bonusStamina, int bonusIntellect, int bonusSpirit, String className) {
         this.bonusStrength = bonusStrength;
@@ -21,6 +24,7 @@ public class Class extends SugarRecord implements Serializable{
         this.bonusIntellect = bonusIntellect;
         this.bonusSpirit = bonusSpirit;
         this.className = className;
+
     }
 
     public int getBonusStrength() {
