@@ -76,11 +76,6 @@
             android:layout_height="match_parent"
             android:text="@string/class_Warrior" />
 
-        <RadioButton
-            android:id="@+id/classDeathKnight"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/class_Death_Knight" />
 
     </RadioGroup>
 

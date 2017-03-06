@@ -20,6 +20,7 @@ public class ChooseFactionRaceActivity extends AppCompatActivity {
     private Faction faction;
     private Race race;
     private String raceName;
+    private Long factionID, raceID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,9 @@ public class ChooseFactionRaceActivity extends AppCompatActivity {
                 sendBtn.setBackgroundColor(getResources().getColor(R.color.allianceBackground));
                 sendBtn.setTextColor(getResources().getColor(R.color.allianceFront));
                 faction = factionList.get(0);
-                Log.d("WOWC", "onCheckedChanged: Facción seleccionada : " + faction.getName());
+                Log.d("WOWC", "onCheckedChanged: CHOSEN FACTION NAME: " + faction.getName());
+                Log.d("WOWC", "onCheckedChanged: CHOSEN FACTION ID : " + faction.getId());
+                factionID = faction.getId();
             }
         });
 
@@ -59,7 +62,9 @@ public class ChooseFactionRaceActivity extends AppCompatActivity {
                 sendBtn.setBackgroundColor(getResources().getColor(R.color.hordeBackground));
                 sendBtn.setTextColor(getResources().getColor(R.color.hordeFront));
                 faction = factionList.get(0);
-                Log.d("WOWC", "onCheckedChanged: Facción seleccionada : " + faction.getName());
+                Log.d("WOWC", "onCheckedChanged: CHOSEN FACTION NAME: " + faction.getName());
+                Log.d("WOWC", "onCheckedChanged: CHOSEN FACTION ID : " + faction.getId());
+                factionID = faction.getId();
             }
         });
 
@@ -72,8 +77,12 @@ public class ChooseFactionRaceActivity extends AppCompatActivity {
                 List<Race> raceList = Race.find(Race.class, "race_name = ?", raceName);
                 if (!raceList.isEmpty()) {
                     race = raceList.get(0);
-                    Log.d("WOWC", "onCheckedChanged: RACE: " + race.getRaceName());
+                    Log.d("WOWC", "onCheckedChanged: CHOSEN RACE NAME: " + race.getRaceName());
+                    Log.d("WOWC", "onCheckedChanged: CHOSEN RACE ID: " + race.getId());
+                    raceID = race.getId();
                     sendBtn.setEnabled(true);
+                } else {
+                    Log.d("WOWC", "onCheckedChanged: raceList size: " + raceList.size());
                 }
             }
         });
@@ -87,8 +96,12 @@ public class ChooseFactionRaceActivity extends AppCompatActivity {
                 List<Race> raceList = Race.find(Race.class, "race_name = ?", raceName);
                 if (!raceList.isEmpty()) {
                     race = raceList.get(0);
-                    Log.d("WOWC", "onCheckedChanged: RACE: " + race.getRaceName());
+                    Log.d("WOWC", "onCheckedChanged: CHOSEN RACE NAME: " + race.getRaceName());
+                    Log.d("WOWC", "onCheckedChanged: CHOSEN RACE ID: " + race.getId());
+                    raceID = race.getId();
                     sendBtn.setEnabled(true);
+                } else {
+                    Log.d("WOWC", "onCheckedChanged: raceList size: " + raceList.size());
                 }
             }
         });
@@ -98,8 +111,8 @@ public class ChooseFactionRaceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChooseFactionRaceActivity.this, ChooseClassActivity.class);
-                intent.putExtra("Faction", faction);
-                intent.putExtra("Race", race);
+                intent.putExtra("factionID", factionID);
+                intent.putExtra("raceID", raceID);
                 startActivity(intent);
             }
         });

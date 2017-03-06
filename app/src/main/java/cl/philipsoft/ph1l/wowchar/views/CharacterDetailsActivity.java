@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import cl.philipsoft.ph1l.wowchar.R;
+import cl.philipsoft.ph1l.wowchar.models.Character;
 
 public class CharacterDetailsActivity extends AppCompatActivity {
 
@@ -17,6 +18,9 @@ public class CharacterDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_character_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Character character = (Character) getIntent().getSerializableExtra("Character");
+
+        setTitle(character.getCharacterName());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -27,4 +31,5 @@ public class CharacterDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
 }

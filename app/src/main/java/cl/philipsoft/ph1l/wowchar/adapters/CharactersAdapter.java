@@ -3,6 +3,7 @@ package cl.philipsoft.ph1l.wowchar.adapters;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import java.util.List;
 import cl.philipsoft.ph1l.wowchar.R;
 import cl.philipsoft.ph1l.wowchar.data.Queries;
 import cl.philipsoft.ph1l.wowchar.models.Character;
+import cl.philipsoft.ph1l.wowchar.models.Faction;
 
 import static cl.philipsoft.ph1l.wowchar.R.drawable.bg_alliance;
 import static cl.philipsoft.ph1l.wowchar.R.drawable.bg_horde;
@@ -42,9 +44,14 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Vi
     public void onBindViewHolder(final ViewHolder holder, int position) {
         int textColor = R.color.textColorPrimary;
         Character character = characters.get(position);
+        Log.d("WOWC", "onBindViewHolder: Loaded Character id: " + character.getId().toString());
+        Log.d("WOWC", "onBindViewHolder: Character Name: " + character.getCharacterName());
+        Log.d("WOWC", "onBindViewHolder: Character Faction: " + character.getCharacterFaction().toString());
+        Faction characterFaction = character.getCharacterFaction();
+        Log.d("WOWC", "onBindViewHolder: FACTION: " + characterFaction.getId().toString());
 
         // TODO: 05-03-2017 modificar modelos forzar id en la data preguardada. Evaluar facciones, razas y clases en base a ID especifico.
-        if (character.getCharacterFaction().getName() == "Horde") {
+        if (characterFaction.getId() == 2) {
             holder.factionBadge.setImageResource(R.mipmap.ic_wow_flag_horde_24dp);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -55,7 +62,7 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Vi
             } else {
                 holder.itemView.setBackgroundResource(bg_alliance);
             }
-        } else if (character.getCharacterFaction().getName() == "Alliance") {
+        } else if (characterFaction.getId() == 1) {
             holder.factionBadge.setImageResource(R.mipmap.ic_wow_flag_alliance_24dp);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -88,6 +95,11 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Vi
 
     public void addCharacter(Character character) {
         characters.add(character);
+        notifyDataSetChanged();
+    }
+
+    public void forceReload() {
+        characters = new Queries().characters();
         notifyDataSetChanged();
     }
 

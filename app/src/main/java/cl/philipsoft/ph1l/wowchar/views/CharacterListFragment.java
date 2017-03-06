@@ -2,8 +2,10 @@ package cl.philipsoft.ph1l.wowchar.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,9 +20,11 @@ import cl.philipsoft.ph1l.wowchar.models.Character;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements CharacterClickListener {
+public class CharacterListFragment extends Fragment implements CharacterClickListener {
+    public static final String CHARACTER = "cl.philipsoft.ph1l.wowchar.views.CharacterListFragment.CHARACTER";
+    private CharactersAdapter charactersAdapter;
 
-    public MainActivityFragment() {
+    public CharacterListFragment() {
     }
 
     @Override
@@ -40,8 +44,26 @@ public class MainActivityFragment extends Fragment implements CharacterClickList
 
         recyclerView.setLayoutManager(layoutManager);
 
-        CharactersAdapter charactersAdapter = new CharactersAdapter(this);
+        charactersAdapter = new CharactersAdapter(this);
         recyclerView.setAdapter(charactersAdapter);
+
+        final SwipeRefreshLayout reloadSr = (SwipeRefreshLayout) view.findViewById(R.id.reloadSr);
+        reloadSr.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        charactersAdapter.forceReload();
+                        reloadSr.setRefreshing(false);
+                    }
+                }, 800);
+            }
+        });
+    }
+
+    public void addCharacter(Character character){
+        charactersAdapter.addCharacter(character);
     }
 
     @Override

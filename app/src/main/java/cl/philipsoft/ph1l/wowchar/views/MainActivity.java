@@ -18,6 +18,8 @@ import cl.philipsoft.ph1l.wowchar.models.Character;
 
 public class MainActivity extends AppCompatActivity implements CharacterCallback {
 
+    private CharacterListFragment characterListFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements CharacterCallback
     @Override
     public void created(Character character) {
         Log.d("WOWC", "created: Personaje creado: " + character.getCharacterName());
+        characterListFragment.addCharacter(character);
     }
 
     @Override

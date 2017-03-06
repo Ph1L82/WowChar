@@ -19,7 +19,7 @@
         android:id="@+id/reloadSr"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="cl.philipsoft.ph1l.wowchar.views.MainActivityFragment"
+        tools:context="cl.philipsoft.ph1l.wowchar.views.CharacterListFragment"
         tools:showIn="@layout/activity_main">
 
 
