@@ -1,5 +1,8 @@
 package cl.philipsoft.ph1l.wowchar.views;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import cl.philipsoft.ph1l.wowchar.R;
 import cl.philipsoft.ph1l.wowchar.models.Character;
@@ -42,9 +44,11 @@ public class CharacterDetailsActivity extends AppCompatActivity {
         if (characterFaction.getId() == 1) {
             factionShield.setImageResource(R.mipmap.ic_wow_alliance_48dp);
             factionShield.setBackgroundColor(getResources().getColor(R.color.allianceBackground));
+            setTitleColor(getResources().getColor(R.color.allianceFront));
         } else if (faction.getId() == 2) {
             factionShield.setImageResource(R.mipmap.ic_wow_horde_48dp);
             factionShield.setBackgroundColor(getResources().getColor(R.color.hordeBackground));
+            setTitleColor(getResources().getColor(R.color.hordeFront));
         } else {
             factionShield.setImageResource(R.mipmap.ic_wow_48dp);
         }
@@ -77,7 +81,19 @@ public class CharacterDetailsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CharacterDetailsActivity.this, "Borrar PJ", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(CharacterDetailsActivity.this)
+                        .setTitle("Eliminar personaje: " + character.getCharacterName().toString())
+                        .setMessage("¿Está seguro?")
+                        .setIcon(android.R.drawable.ic_input_delete)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                character.delete();
+                                Intent intent = new Intent(CharacterDetailsActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
     }
