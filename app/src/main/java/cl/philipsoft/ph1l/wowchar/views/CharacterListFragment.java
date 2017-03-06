@@ -62,7 +62,7 @@ public class CharacterListFragment extends Fragment implements CharacterClickLis
         });
     }
 
-    public void addCharacter(Character character){
+    public void addCharacter(Character character) {
         charactersAdapter.addCharacter(character);
     }
 
@@ -77,6 +77,16 @@ public class CharacterListFragment extends Fragment implements CharacterClickLis
     public void clickedCharacter(Character character) {
         Intent intent = new Intent(getActivity(), CharacterDetailsActivity.class);
         intent.putExtra("Character", character);
+        startActivity(intent);
+    }
+
+    @Override
+    public void clickedIds(Long factionID, Long raceID, Long classID, Long characterID) {
+        Intent intent = new Intent(getActivity(), CharacterDetailsActivity.class);
+        intent.putExtra("factionID", factionID);
+        intent.putExtra("raceID", raceID);
+        intent.putExtra("classID", classID);
+        intent.putExtra("characterID", characterID);
         startActivity(intent);
     }
 }

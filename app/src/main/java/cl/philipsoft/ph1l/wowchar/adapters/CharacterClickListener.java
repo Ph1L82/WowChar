@@ -11,4 +11,5 @@ public interface CharacterClickListener {
     void clickedId(Long id);
 
     void clickedCharacter(Character character);
+    void clickedIds(Long factionID, Long raceID, Long classID, Long characterID);
 }

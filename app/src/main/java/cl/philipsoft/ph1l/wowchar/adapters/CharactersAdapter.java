@@ -15,7 +15,9 @@ import java.util.List;
 import cl.philipsoft.ph1l.wowchar.R;
 import cl.philipsoft.ph1l.wowchar.data.Queries;
 import cl.philipsoft.ph1l.wowchar.models.Character;
+import cl.philipsoft.ph1l.wowchar.models.Class;
 import cl.philipsoft.ph1l.wowchar.models.Faction;
+import cl.philipsoft.ph1l.wowchar.models.Race;
 
 import static cl.philipsoft.ph1l.wowchar.R.drawable.bg_alliance;
 import static cl.philipsoft.ph1l.wowchar.R.drawable.bg_horde;
@@ -43,11 +45,14 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Vi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         int textColor = R.color.textColorPrimary;
-        Character character = characters.get(position);
+        final Character character = characters.get(position);
         Log.d("WOWC", "onBindViewHolder: Loaded Character id: " + character.getId().toString());
         Log.d("WOWC", "onBindViewHolder: Character Name: " + character.getCharacterName());
         Log.d("WOWC", "onBindViewHolder: Character Faction: " + character.getCharacterFaction().toString());
-        Faction characterFaction = character.getCharacterFaction();
+        final Faction characterFaction = character.getCharacterFaction();
+        final Race characterRace = character.getCharacterRace();
+        final Class characterClass = character.getCharacterClass();
+
         Log.d("WOWC", "onBindViewHolder: FACTION: " + characterFaction.getId().toString());
 
         // TODO: 05-03-2017 modificar modelos forzar id en la data preguardada. Evaluar facciones, razas y clases en base a ID especifico.
@@ -83,7 +88,8 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Vi
             @Override
             public void onClick(View v) {
                 Character aux = characters.get(holder.getAdapterPosition());
-                listener.clickedCharacter(aux);
+//                listener.clickedCharacter(aux);
+                listener.clickedIds(characterFaction.getId(),characterRace.getId(),characterClass.getId(),character.getId());
             }
         });
     }
