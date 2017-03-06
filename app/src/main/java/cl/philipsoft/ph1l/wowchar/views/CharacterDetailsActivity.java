@@ -55,7 +55,7 @@ public class CharacterDetailsActivity extends AppCompatActivity {
         setTitle(character.getCharacterName());
 
 //        TextView nameTv = (TextView) findViewById(R.id.nameTv);
-//        nameTv.setText(character.getCharacterName());
+//        nameTv.setText(character.getCharacterName().toString());
 //        TextView factionTv = (TextView) findViewById(R.id.charFactionTv);
 //        factionTv.setText(character.getCharacterFaction().getName());
 //        TextView raceTv = (TextView) findViewById(R.id.charRaceTv);
