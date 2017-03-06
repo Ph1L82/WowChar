@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements CharacterCallback
 
     @Override
     public void created(Character character) {
-        Log.d("WOWC", "created: Personaje creado: "+character.getCharacterName());
+        Log.d("WOWC", "created: Personaje creado: " + character.getCharacterName());
     }
 
     @Override
@@ -71,12 +71,12 @@ public class MainActivity extends AppCompatActivity implements CharacterCallback
 
     @Override
     public void noFaction() {
-        Toast.makeText(this, "El personaje no tiene Facción D:!!! es n revelde!...con v", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "El personaje no tiene Facción", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void noClass() {
-        Toast.makeText(this, "No tiene clase...que picante", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "No tiene clase", Toast.LENGTH_SHORT).show();
     }
 
     private void dataLoader() {

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -40,7 +41,8 @@ public class ChooseClassActivity extends AppCompatActivity implements CharacterC
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<Class> charClassList = Class.find(Class.class, "class_name = ?", getResources().getResourceEntryName(classRg.getCheckedRadioButtonId()).replace("class", ""));
+                String className = getResources().getResourceEntryName(classRg.getCheckedRadioButtonId()).replace("class", "");
+                List<Class> charClassList = Class.find(Class.class, "class_name = ?", className);
                 if (!charClassList.isEmpty()) {
                     Class charClass = charClassList.get(0);
                     Log.d("WOWC", "onClick: charClass: " + charClass.getClassName());
@@ -49,6 +51,8 @@ public class ChooseClassActivity extends AppCompatActivity implements CharacterC
                     createCharacter.validation(character);
                     Intent intent = new Intent(ChooseClassActivity.this, MainActivity.class);
                     startActivity(intent);
+                } else {
+                    Log.d("WOWC", "onClick: Clase no encontrada: " + className);
                 }
             }
         });
@@ -56,21 +60,24 @@ public class ChooseClassActivity extends AppCompatActivity implements CharacterC
 
     @Override
     public void created(Character character) {
-
+        Log.d("WOWC", "created: Personaje creado: " + character.getCharacterName());
     }
 
     @Override
     public void noName() {
-
+        Log.d("WOWC", "noName: ");
+        Toast.makeText(this, "Debes darle un nombre a tu personaje", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void noFaction() {
-
+        Log.d("WOWC", "noFaction: ");
+        Toast.makeText(this, "Tu personaje debe pertenecer a una facción, no seas rebelde!.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void noClass() {
-
+        Log.d("WOWC", "noClass: ");
+        Toast.makeText(this, "Tu personaje debe ser de una clase determinada.", Toast.LENGTH_SHORT).show();
     }
 }

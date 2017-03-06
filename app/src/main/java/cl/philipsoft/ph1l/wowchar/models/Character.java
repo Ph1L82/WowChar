@@ -13,7 +13,9 @@ public class Character extends SugarRecord implements Serializable {
     private Race characterRace;
     private Class characterClass;
     private String characterName;
-    private int characterLevel, strength, agility, stamina, intellect, spirit;
+    private int characterLevel = 1;
+    private int strength, agility, stamina, intellect, spirit;
+    private double statMultiplier;
 
     public int getStrength() {
         return strength;
@@ -115,5 +117,23 @@ public class Character extends SugarRecord implements Serializable {
 
     public void setCharacterName(String characterName) {
         this.characterName = characterName;
+    }
+
+    private void setStats() {
+        this.setAgility(this.getCharacterRace().getBaseAgility() + this.getCharacterClass().getBonusAgility());
+        this.setIntellect(this.getCharacterRace().getBaseIntellect() + this.getCharacterClass().getBonusIntellect());
+        this.setStamina(this.getCharacterRace().getBaseStamina() + this.getCharacterClass().getBonusStamina());
+        this.setStrength(this.getCharacterRace().getBaseStrength() + this.getCharacterClass().getBonusStrength());
+        this.setSpirit(this.getCharacterRace().getBaseSpirit() + this.getCharacterClass().getBonusSpirit());
+    }
+
+    public void setStatsByLvl(int lvl) {
+        statMultiplier = ((lvl - 1) * 0.2);
+        this.setStats();
+        this.setAgility((int) (this.getAgility() + statMultiplier));
+        this.setStamina((int) (this.getStamina() + statMultiplier));
+        this.setIntellect((int) (this.getIntellect() + statMultiplier));
+        this.setStrength((int) (this.getStrength() + statMultiplier));
+        this.setSpirit((int) (this.getSpirit() + statMultiplier));
     }
 }

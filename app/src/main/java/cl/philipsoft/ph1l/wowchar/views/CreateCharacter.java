@@ -16,11 +16,17 @@ public class CreateCharacter {
     public void validation(Character character) {
         if ((character.getCharacterFaction() != null) && (character.getCharacterClass() != null)) {
             if (character.getCharacterName().trim().length() > 0) {
+                character.setCharacterLevel(1);
+                character.setStatsByLvl(character.getCharacterLevel());
                 character.save();
                 callback.created(character);
             } else {
                 callback.noName();
             }
+        } else if (character.getCharacterFaction() != null) {
+            callback.noClass();
+        } else {
+            callback.noFaction();
         }
     }
 }
